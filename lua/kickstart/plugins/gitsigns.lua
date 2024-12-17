@@ -52,6 +52,8 @@ return {
         map('n', '<leader>hD', function()
           gitsigns.diffthis '@'
         end, { desc = 'git [D]iff against last commit' })
+        map('n', '<leader>hn', gitsigns.next_hunk, { desc = '[n] next hunk' })
+        map('n', '<leader>hN', gitsigns.next_hunk, { desc = '[N] previous hunk' })
         -- Toggles
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
         map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
