@@ -82,10 +82,22 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
-
--- Python fixed venv
+-- Determine the home directory
 local home = os.getenv 'USERPROFILE' or os.getenv 'HOME'
-vim.g.python3_host_prog = home .. '\\AppData\\Local\\nvim\\pynvim_venv\\Scripts\\python.exe'
+
+-- Ensure the home directory was found
+if not home then
+  error 'Could not determine home directory from environment variables USERPROFILE or HOME'
+end
+
+-- Construct the path to the Python executable
+local python_path = home .. '\\AppData\\Local\\nvim\\pynvim_venv\\Scripts\\python.exe'
+
+-- Set the Python host program for Neovim
+vim.g.python3_host_prog = python_path
+
+-- Print the path for debugging purposes (optional)
+print('Python3 host program set to: ' .. python_path)
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -933,7 +945,7 @@ require('lazy').setup({
   require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
